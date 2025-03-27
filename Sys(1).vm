@@ -1,0 +1,63 @@
+// Sum entries in array.
+function Sys.sumArrayEntries 2
+    // Set THIS to first element of array.
+    push argument 0
+    pop pointer 0
+    // Compute address of last element in the array.
+    push pointer 0
+    push argument 1
+    add
+    push constant 1
+    sub
+    pop local 0 // address of last element
+    // Initialise sum to 0.
+    push constant 0
+    pop local 1 // sum
+label loop_begin
+    // Check exit condition.
+    push pointer 0
+    push local 0
+    gt
+    if-goto loop_end
+
+    // Add current element to sum.
+    push this 0
+    push local 1
+    add
+    pop local 1
+
+   // Move THIS to next element.
+    push pointer 0
+    push constant 1
+    add
+    pop pointer 0
+
+    goto loop_begin
+label loop_end
+    push local 1
+    return
+
+// Create the array
+// | 2048 |   4 |
+// | 2049 |   5 |
+// | 2050 |   7 |
+// | 2051 |  12 |
+// Starting address:   2048
+// Number of elements:    4
+// Call the function to compute the sum
+function Sys.init 0
+    push constant 2048
+    pop pointer 0
+    push constant 4
+    pop this 0
+    push constant   5
+    pop this 1
+    push constant   7
+    pop this 2
+    push constant  12
+    pop this 3
+    push constant 2048
+    push constant   4
+    call Sys.sumArrayEntries 2
+label WHILE
+    goto WHILE              // infinite loop

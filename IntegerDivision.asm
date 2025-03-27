@@ -89,7 +89,7 @@ D=M
 D=D-M
 @POSITIVE_Q
 D;JEQ
-@R8
+@R7
 M=-M
 (POSITIVE_Q)
 
